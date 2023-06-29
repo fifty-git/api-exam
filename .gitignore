@@ -1,0 +1,6 @@
+*.code-workspace
+.vscode/*
+node_modules/*
+.env*
+.serverless/*
+*.DS_Store
