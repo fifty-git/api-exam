@@ -1,0 +1,22 @@
+service: doxa
+frameworkVersion: "3"
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: dev
+  environment:
+    ACCESS_TOKEN_SECRET: ${self:custom.secretToken.${opt:stage, 'dev'}, 'MY_SECRET_TOKEN'}
+custom:
+  myStage: ${opt:stage, self:provider.stage}
+  secretToken:
+    dev: "DEV_SECRET_TOKEN"
+    prod: "PROD_SECRET_TOKEN"
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: "*"
